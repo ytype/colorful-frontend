@@ -2,12 +2,14 @@ import * as firebase from 'firebase'
 import { Commit } from 'vuex'
 
 interface State{
-    user: any
+  user: any
 }
 
 export default {
-  state: {
-    user: null
+  state () {
+    return {
+      user: null
+    }
   },
   mutations: {
     setUser (state:State, payload:any) {
@@ -28,15 +30,13 @@ export default {
             photoUrl: user.photoURL
           }
           commit('setUser', newUser)
-        }
-        )
+        })
         .catch((error: string) => {
           commit('setLoading', false)
           commit('setError', error)
           // eslint-disable-next-line no-console
           console.log(error)
-        }
-        )
+        })
     },
     signUserIn ({ commit }:{commit:Commit}, payload:any) {
       commit('setLoading', true)

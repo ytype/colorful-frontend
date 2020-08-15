@@ -4,7 +4,7 @@
     <input v-model="title" required="true" placeholder="title">
     <input v-model="content" required="true" placeholder="content">
     <input v-model="url" required="true" placeholder="url">
-
+    {{ this.$store.getters.user }}
     <div class="spans">
       <span v-for="(find, index) in color" :key="index" :style="{ backgroundColor: find.value.hex }" class="dot" />
     </div>

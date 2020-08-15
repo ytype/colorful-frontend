@@ -4,10 +4,10 @@ import user from './user'
 import shared from './shared'
 
 const vuexLocal = new VuexPersistence({
-  storage: window.sessionStorage
+  storage: sessionStorage
 })
 
-const store = new Vuex.Store({
+const store = () => new Vuex.Store({
   modules: {
     user,
     shared
