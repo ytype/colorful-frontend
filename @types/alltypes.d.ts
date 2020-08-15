@@ -1,1 +1,1 @@
-declare module 'CommentInput'
+// declare module 'CommentInput'

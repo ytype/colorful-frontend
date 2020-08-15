@@ -1,14 +1,16 @@
 <template>
   <div>
     {{ data }}
-    <CommentInput />
+    <CommentInput :id="id" />
   </div>
 </template>
 
-<script lang="ts">
+<script lang="
+      ts"
+    >
 import Vue from 'vue'
 import axios from 'axios'
-import CommentInput from '@/components/comment/input/index'
+// import CommentInput from '@/components/comment/input/index'
 export default Vue.extend({
   components: { },
   data () {
@@ -28,3 +30,6 @@ export default Vue.extend({
   }
 })
 </script>
+    </commentinput>
+  </div>
+</template></div></commentinput>

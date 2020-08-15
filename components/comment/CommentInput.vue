@@ -11,12 +11,8 @@
 import Vue from 'vue'
 import axios from 'axios'
 export default Vue.extend({
-  props: ['_id'],
-  data () {
-    return {
-      id: this._id
-    }
-  },
+  name: 'CommentInput',
+  props: ['id'],
   methods: {
     addComment () {
       axios.post('http://127.0.0.1:5000/api/comment', {
