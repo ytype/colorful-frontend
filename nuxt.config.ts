@@ -21,7 +21,8 @@ export default {
       { hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rer: 'stylesheet', type: 'text/css', href: 'http://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css' }
     ]
   },
   /*

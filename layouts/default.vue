@@ -38,5 +38,10 @@ export default Vue.extend({
   }
 })
 </script>
+
 <style>
+* {
+  scroll-behavior: auto;
+  font-family: 'Spoqa Han Sans', 'Sans-serif';
+  }
 </style>

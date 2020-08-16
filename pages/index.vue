@@ -1,9 +1,7 @@
 <template>
   <div>
-    <b-button type="is-light">
-      Light
-    </b-button>
-    <div class="columns is-multiline">
+    <FullHero />
+    <div id="main" class="columns is-multiline main">
       <ColorCard v-for="(data,idx) in color" :key="idx" :data="data" />
     </div>
   </div>
@@ -18,7 +16,7 @@ import { ToastProgrammatic as Toast } from 'buefy'
 export default Vue.extend({
   data () {
     return {
-      color: [] as Icolor[]
+      color: [{}, {}, {}, {}] as Icolor[]
     }
   },
   mounted () {
@@ -33,3 +31,11 @@ export default Vue.extend({
   }
 })
 </script>
+
+<style lang="scss" scoped>
+
+.main {
+  background: #F0F0EE;
+  padding: 1rem;
+}
+</style>
