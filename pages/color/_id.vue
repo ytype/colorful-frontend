@@ -1,35 +1,78 @@
 <template>
   <div>
-    {{ data }}
-    <CommentInput :id="id" />
+    <ColorCarousel :data="data.color" />
+    <div class="main">
+      <h1 class="title">
+        <i class="fas fa-palette" style="margin-right:10px;" />
+        {{ data.title }}
+      </h1>
+      <p class="date">
+        {{ date }}
+      </p>
+      <p>{{ data.content }}</p>
+    </div>
+    <CommentInput :id="id" class="comment-input" @update="update" />
+    <div v-for="(comment,idx) in data.comments" :key="idx" class="comment-view-box">
+      <CommentView :comment="comment" @update="update" />
+    </div>
   </div>
 </template>
 
-<script lang="
-      ts"
-    >
+<script lang="ts">
 import Vue from 'vue'
 import axios from 'axios'
-// import CommentInput from '@/components/comment/input/index'
+import { Icolor } from '@/models/color'
 export default Vue.extend({
   components: { },
   data () {
     return {
       id: this.$route.params.id,
-      data: {}
+      data: {} as Icolor,
+      date: ''
     }
   },
   mounted () {
-    axios.get(`http://127.0.0.1:5000/api/color/${this.id}`)
-      .then((response) => {
-        this.data = response.data
-      })
-      .catch((error) => {
-        console.log(error)
-      })
+    this.fetchData()
+  },
+  methods: {
+    update () {
+      this.fetchData()
+    },
+    calcDate () {
+      const old = this.data.date
+      this.date = old.substr(0, 10)
+    },
+    fetchData () {
+      axios.get(`http://127.0.0.1:5000/api/color/${this.id}`)
+        .then((response) => {
+          this.data = response.data.color[0]
+          this.calcDate()
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    }
   }
 })
 </script>
-    </commentinput>
-  </div>
-</template></div></commentinput>
+
+<style lang="scss" scoped>
+.main {
+  padding: 1rem;
+  .title {
+  font-size: 1.5rem;
+  margin-top: 1rem;
+  margin-bottom: 0rem;
+  }
+  .date {
+    color: #434343;
+    margin-bottom: 0.5rem;
+  }
+}
+.comment-input {
+  margin: 0rem 1rem;
+}
+.comment-view-box {
+  margin-bottom: 1rem;
+}
+</style>

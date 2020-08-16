@@ -6,7 +6,6 @@ export interface Icolor {
     date: string,
     like: string[],
     title: string,
-    url: string,
     user: string,
     _id: string
   }

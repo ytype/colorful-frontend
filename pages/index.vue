@@ -11,8 +11,6 @@
 import Vue from 'vue'
 import axios from 'axios'
 import { Icolor } from '@/models/color'
-import { ToastProgrammatic as Toast } from 'buefy'
-
 export default Vue.extend({
   data () {
     return {
@@ -20,7 +18,6 @@ export default Vue.extend({
     }
   },
   mounted () {
-    Toast.open('Something happened')
     axios.get('http://127.0.0.1:5000/api/color')
       .then((response) => {
         this.color = response.data.color
@@ -33,9 +30,8 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-
 .main {
-  background: #F0F0EE;
+  background: #EEEEEE;
   padding: 1rem;
 }
 </style>

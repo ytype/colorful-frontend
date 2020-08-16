@@ -20,11 +20,13 @@
     "@types/node": "^14.0.27",
     "@types/vue-color": "^2.4.2",
     "axios": "^0.19.2",
+    "global": "^4.4.0",
     "node-sass": "^4.14.1",
     "nuxt": "^2.14.0",
     "nuxt-buefy": "^0.3.31",
     "nuxt-property-decorator": "^2.7.2",
     "sass-loader": "^9.0.3",
+    "surge": "^0.21.6",
     "vue-color": "^2.7.1",
     "vuex-persist": "^2.2.0"
   },

@@ -2,14 +2,11 @@
   <b-navbar>
     <template slot="brand">
       <b-navbar-item tag="router-link" :to="{ path: '/' }">
-        <img
-          src="https://raw.githubusercontent.com/buefy/buefy/dev/static/img/buefy-logo.png"
-          alt="Lightweight UI components for Vue.js based on Bulma"
-        >
+        <img class="logo" src="~assets/logo.png">
       </b-navbar-item>
     </template>
     <template slot="start">
-      <b-navbar-item href="#">
+      <b-navbar-item href="/">
         Home
       </b-navbar-item>
       <b-navbar-item href="#">
@@ -19,8 +16,17 @@
         <b-navbar-item href="#">
           About
         </b-navbar-item>
-        <b-navbar-item href="#">
-          Contact
+        <b-navbar-item href="https://github.com/ytype/colorful-frontend">
+          <i class="fab fa-github" />
+          <p class="github">
+            frontend
+          </p>
+        </b-navbar-item>
+        <b-navbar-item href="https://github.com/ytype/colorful-backend">
+          <i class="fab fa-github" />
+          <p class="github">
+            backend
+          </p>
         </b-navbar-item>
       </b-navbar-dropdown>
     </template>
@@ -28,14 +34,63 @@
     <template slot="end">
       <b-navbar-item tag="div">
         <div class="buttons">
-          <a class="button is-primary">
-            <strong>Sign up</strong>
+          <a v-if="!logoutShow">
+            <LoginGoogle />
           </a>
-          <a class="button is-light">
-            Log in
+          <a v-if="logoutShow" class="button is-light" @click="logout">
+            Logout
           </a>
         </div>
       </b-navbar-item>
     </template>
   </b-navbar>
 </template>
+
+<script lang="ts">
+import Vue from 'vue'
+import { ToastProgrammatic as Toast } from 'buefy'
+
+export default Vue.extend({
+  data () {
+    return {
+      modal: false
+    }
+  },
+  computed: {
+    logoutShow () {
+      if (this.$store.getters.user) {
+        return true
+      } else {
+        return false
+      }
+    }
+  },
+  methods: {
+    logout () {
+      Toast.open('로그아웃 했습니다.')
+      this.$store.dispatch('logout')
+    }
+  }
+})
+</script>
+
+<style lang="scss" >
+.navbar-item img {
+  min-height: 2.5rem;
+}
+.navbar-link:not(.is-arrowless)::after {
+  border-color: #FF9E6E;
+  margin-top: -0.375em;
+  right: 1.125em;
+}
+.signin {
+  background: linear-gradient(90deg, #FF9671, #FFC75F);
+}
+.logo {
+  margin-left: 5px;
+}
+.github {
+  margin-left: 5px;
+  display: inline;
+}
+</style>
