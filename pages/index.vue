@@ -1,23 +1,31 @@
 <template>
   <div>
-    {{ color }}
+    <b-button type="is-light">
+      Light
+    </b-button>
+    <div class="columns is-multiline">
+      <ColorCard v-for="(data,idx) in color" :key="idx" :data="data" />
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import axios from 'axios'
+import { Icolor } from '@/models/color'
+import { ToastProgrammatic as Toast } from 'buefy'
+
 export default Vue.extend({
   data () {
     return {
-      color: {} as any
+      color: [] as Icolor[]
     }
   },
   mounted () {
+    Toast.open('Something happened')
     axios.get('http://127.0.0.1:5000/api/color')
       .then((response) => {
-        this.color = response.data
-        console.log(this.color)
+        this.color = response.data.color
       })
       .catch((error) => {
         console.log(error.response)

@@ -11,7 +11,6 @@
 import Vue from 'vue'
 import axios from 'axios'
 export default Vue.extend({
-  name: 'CommentInput',
   props: ['id'],
   methods: {
     addComment () {
