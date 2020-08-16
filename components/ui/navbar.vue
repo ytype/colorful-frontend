@@ -9,13 +9,10 @@
       <b-navbar-item href="/">
         Home
       </b-navbar-item>
-      <b-navbar-item href="#">
-        Documentation
+      <b-navbar-item href="/form">
+        Add Color
       </b-navbar-item>
       <b-navbar-dropdown label="Info">
-        <b-navbar-item href="#">
-          About
-        </b-navbar-item>
         <b-navbar-item href="https://github.com/ytype/colorful-frontend">
           <i class="fab fa-github" />
           <p class="github">

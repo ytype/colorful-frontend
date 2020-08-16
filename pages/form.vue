@@ -4,23 +4,19 @@
     <h1 class="has-text-centered title">
       색상 스키마 등록
     </h1>
-    <input v-model="user" class="input" required="true" placeholder="user">
     <input v-model="title" required="true" placeholder="title" class="input">
-    <input v-model="content" required="true" placeholder="content" class="input" style="width: 40rem;">
-    {{ this.$store.getters.user }}
-    <div class="spans">
-      <span v-for="(find, index) in color" :key="index" :style="{ backgroundColor: find.value.hex }" class="dot" />
-    </div>
+    <input v-model="content" required="true" placeholder="content" class="input" style="width: 30rem;">
     <div v-for="(find, index) in color" :key="index">
       <input :key="index" v-model="find.value.hex" readonly class="input form-input" @click="selected = index">
-      <chrome-picker v-if="index == selected" v-model="color[index].value" />
+      <chrome-picker v-if="index == selected" v-model="color[index].value" style="margin-left:1rem; margin-top:5px;" />
     </div>
-    <button class="button" @click="addColor">
+    <b-button type="is-light" @click="addColor">
       add
-    </button>
-    <button class="button" @click="submit">
+    </b-button>
+
+    <b-button type="is-light" @click="submit">
       submit
-    </button>
+    </b-button>
   </div>
 </template>
 
@@ -33,12 +29,14 @@ export default Vue.extend({
   components: { 'chrome-picker': Chrome },
   data () {
     return {
-      color: [] as any,
-      user: '',
+      color: [] as any[],
       title: '',
       content: '',
       selected: 0
     }
+  },
+  mounted () {
+    this.addColor()
   },
   methods: {
     addColor () {
@@ -47,13 +45,13 @@ export default Vue.extend({
     submit () {
       axios.post('http://127.0.0.1:5000/api/color', {
         color: this.color,
-        user: this.user,
         title: this.title,
         content: this.content
       })
         .then((response) => {
           if (response.status === 200) {
             Toast.open('색상을 등록했습니다.')
+            this.$router.push('/')
           } else {
             Toast.open('오류가 발생했습니다.')
           }
@@ -69,13 +67,19 @@ export default Vue.extend({
 
 <style lang="scss" scoped>
 .form-input {
-  border-right:0px; border-top:0px; boder-left:0px; boder-bottom:1px;
-  border-radius: 0px;
+  border-radius: 0 !important;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  border-bottom: 1px solid #FF9E6E;
 }
 .title {
   margin-top:2rem;
 }
 .input {
+  display: block;
+  margin-left: 1rem;
+  margin-rigth: 1rem;
   border-radius: 5px;
   width: 20rem;
   height: 33px;
@@ -84,5 +88,8 @@ export default Vue.extend({
 }
 .input:focus, .taginput .taginput-container.is-focusable:focus, .textarea:focus, .select select:focus, .is-focused.input, .taginput .is-focused.taginput-container.is-focusable, .is-focused.textarea, .select select.is-focused, .input:active, .taginput .taginput-container.is-focusable:active, .textarea:active, .select select:active, .is-active.input, .taginput .is-active.taginput-container.is-focusable, .is-active.textarea, .select select.is-active {
   border-color: #FF9E6E;
+}
+.is-light {
+  margin: 1rem 0rem 1rem 1rem;
 }
 </style>
