@@ -6,6 +6,8 @@
 
 <script lang="ts">
 import Vue from 'vue'
+// import { ToastProgrammatic as Toast } from 'buefy'
+
 export default Vue.extend({
   name: 'LoginGoogle',
   methods: {

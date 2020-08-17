@@ -1,7 +1,6 @@
 import VuexPersistence from 'vuex-persist'
 import Vuex from 'vuex'
 import user from './user'
-import shared from './shared'
 
 const vuexLocal = new VuexPersistence({
   storage: sessionStorage
@@ -9,8 +8,7 @@ const vuexLocal = new VuexPersistence({
 
 const store = () => new Vuex.Store({
   modules: {
-    user,
-    shared
+    user
   },
   plugins: [vuexLocal.plugin]
 })

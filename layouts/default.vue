@@ -22,11 +22,6 @@ export default Vue.extend({
         appId: process.env.VUE_APP_appId,
         measurementId: process.env.VUE_APP_measurementId
       })
-      firebase.auth().onAuthStateChanged((user) => {
-        if (user) {
-          this.$store.dispatch('autoSignIn', user)
-        }
-      })
       // eslint-disable-next-line no-console
       console.log('init firebase')
     } catch (err) {

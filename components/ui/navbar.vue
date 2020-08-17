@@ -48,11 +48,6 @@ import Vue from 'vue'
 import { ToastProgrammatic as Toast } from 'buefy'
 
 export default Vue.extend({
-  data () {
-    return {
-      modal: false
-    }
-  },
   computed: {
     logoutShow () {
       if (this.$store.getters.user) {
