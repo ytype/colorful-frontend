@@ -123,6 +123,9 @@ export default Vue.extend({
   }
 }
 .email {
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
   display: inline;
   color: gray;
 }

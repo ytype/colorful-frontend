@@ -14,11 +14,6 @@
         </h2>
       </div>
     </div>
-    <div class="hero-foot has-text-centered">
-      <a href="#main">
-        <button class="ghost">scroll down</button>
-      </a>
-    </div>
   </section>
 </template>
 
@@ -59,10 +54,6 @@ export default Vue.extend({
   -webkit-user-drag: none;
   height: 100%;
   width: 100%;
-}
-.hero-foot {
-  z-index: 1;
-  margin-bottom: 1rem;
 }
 .container {
   .title {

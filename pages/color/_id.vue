@@ -1,13 +1,14 @@
 <template>
-  <div>
+  <section>
     <ColorCarousel :data="data.color" />
+    <img v-if="data.image" :src="`${data.image}`">
     <div class="main">
       <h1 class="title">
         <i class="fas fa-palette" style="margin-right:10px;" />
         {{ data.title }}
       </h1>
       <p class="date">
-        {{ date }}
+        {{ data.user }} {{ date }}
       </p>
       <p>{{ data.content }}</p>
     </div>
@@ -15,7 +16,8 @@
     <div v-for="(comment,idx) in data.comments" :key="idx" class="comment-view-box">
       <CommentView :comment="comment" @update="update" />
     </div>
-  </div>
+    <b-loading :active="isLoading" :is-full-page="true" />
+  </section>
 </template>
 
 <script lang="ts">
@@ -26,6 +28,8 @@ export default Vue.extend({
   components: { },
   data () {
     return {
+      isLoading: true,
+      isFullPage: true,
       id: this.$route.params.id,
       data: {} as Icolor,
       date: ''
@@ -46,6 +50,7 @@ export default Vue.extend({
       axios.get(`http://127.0.0.1:5000/api/color/${this.id}`)
         .then((response) => {
           this.data = response.data.color[0]
+          this.isLoading = false
           this.calcDate()
         })
         .catch((error) => {

@@ -4,6 +4,7 @@
     <h1 class="has-text-centered title">
       색상 스키마 등록
     </h1>
+    <ImageUpload @updateBase64="updateBase64" />
     <input v-model="title" required="true" placeholder="title" class="input">
     <input v-model="content" required="true" placeholder="content" class="input" style="width: 30rem;">
     <div v-for="(find, index) in color" :key="index">
@@ -21,6 +22,7 @@
 </template>
 
 <script lang="ts">
+import { stringify } from 'querystring'
 import Vue from 'vue'
 import { Chrome } from 'vue-color'
 import axios from 'axios'
@@ -32,7 +34,8 @@ export default Vue.extend({
       color: [] as any[],
       title: '',
       content: '',
-      selected: 0
+      selected: 0,
+      base64: ''
     }
   },
   mounted () {
@@ -43,6 +46,12 @@ export default Vue.extend({
     }
   },
   methods: {
+    updateBase64 (base64:string) {
+      this.base64 = base64
+      if (this.base64) {
+        Toast.open('이미지 업로드')
+      }
+    },
     addColor () {
       this.color.push({ value: '' })
     },
@@ -51,7 +60,8 @@ export default Vue.extend({
         color: this.color,
         title: this.title,
         content: this.content,
-        user: this.$store.getters.user.email
+        user: this.$store.getters.user.email,
+        image: this.base64.toString()
       })
         .then((response) => {
           if (response.status === 200) {

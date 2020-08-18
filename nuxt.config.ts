@@ -37,6 +37,7 @@ export default {
   plugins: [
     '~/plugins/fontawesome.ts'
   ],
+
   /*
   ** Auto import components
   ** See https://nuxtjs.org/api/configuration-components
