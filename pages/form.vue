@@ -37,6 +37,10 @@ export default Vue.extend({
   },
   mounted () {
     this.addColor()
+    if (this.$store.getters.user === null) {
+      Toast.open('로그인 후 이용해주세요.')
+      this.$router.push('/')
+    }
   },
   methods: {
     addColor () {
@@ -46,7 +50,8 @@ export default Vue.extend({
       axios.post('http://127.0.0.1:5000/api/color', {
         color: this.color,
         title: this.title,
-        content: this.content
+        content: this.content,
+        user: this.$store.getters.user.email
       })
         .then((response) => {
           if (response.status === 200) {

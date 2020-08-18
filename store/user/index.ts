@@ -1,8 +1,13 @@
 import * as firebase from 'firebase'
 import { Commit } from 'vuex'
 
+interface User {
+  email: string,
+  id:string,
+  name: string
+}
 interface State{
-  user: any
+  user: User
 }
 
 export default {
@@ -18,23 +23,19 @@ export default {
   },
   actions: {
     signUserInGoogle ({ commit }:{commit:Commit}) {
-      console.log('signUserInGoogle 호출')
       firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider())
         .then((user:any) => {
-          console.log('then 진입')
           const newUser = {
-            id: user.uid,
-            name: user.displayName,
-            email: user.email,
-            photoUrl: user.photoURL
+            id: user.additionalUserInfo.profile.id,
+            name: user.additionalUserInfo.profile.name,
+            email: user.additionalUserInfo.profile.email
           }
-          console.log(newUser)
+
           commit('setUser', newUser)
           return '로그인 성공'
         })
         .catch((error:string) => {
-          console.log('catch 진입')
-          return '로그인 실패' + error
+          return '로그인 실패 :' + error
         })
     },
     logout ({ commit }:{commit:Commit}) {
