@@ -75,29 +75,35 @@ export default Vue.extend({
         })
     },
     addLike () {
-      axios.post('http://49.50.162.193:5000/api/like', {
-        params: {
-          id: this.id,
-          user: this.$store.getters.user.email
-        }
-      })
-        .then(() => {
-          Toast.open('좋아요를 눌렀습니다.')
+      if (!this.$store.getters.user) {
+        Toast.open('로그인 후 이용해주세요.')
+      } else {
+        axios.post('http://49.50.162.193:5000/api/like', { // http://49.50.162.193:5000/api/like
+          params: {
+            id: this.id,
+            user: this.$store.getters.user.email
+          }
         })
-        .catch((error) => {
-          console.log(error.response)
-        })
-      location.reload()
+          .then(() => {
+            Toast.open('좋아요를 눌렀습니다.')
+          })
+          .catch((error) => {
+            console.log(error.response)
+          })
+      }
     },
     delLike () {
-      axios.delete(`http://49.50.162.193:5000/api/unlike/${this.id}/${this.$store.getters.user.email}`)
-        .then(() => {
-          Toast.open('좋아요를 취소했습니다.')
-        })
-        .catch((error) => {
-          console.log(error.response)
-        })
-      location.reload()
+      if (!this.$store.getters.user) {
+        Toast.open('로그인 후 이용해주세요.')
+      } else {
+        axios.delete(`http://49.50.162.193:5000/api/like/${this.id}/${this.$store.getters.user.email}`)
+          .then(() => {
+            Toast.open('좋아요를 취소했습니다.')
+          })
+          .catch((error) => {
+            console.log(error.response)
+          })
+      }
     }
   }
 })
@@ -117,7 +123,7 @@ export default Vue.extend({
   }
 }
 .comment-input {
-  margin: 0rem 1rem;
+  margin: 0rem;
 }
 .comment-view-box {
   margin-bottom: 1rem;
