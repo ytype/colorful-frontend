@@ -12,6 +12,12 @@
       <p class="date">
         {{ data.user }} {{ date }}
       </p>
+      <button v-if="likeBtnShow" class="button is-rounded comment-input" @click="addLike">
+        좋아요
+      </button>
+      <button v-else class="button is-rounded comment-input" @click="delLike">
+        안 좋아요
+      </button>
       <p>{{ data.content }}</p>
     </div>
     <CommentInput :id="id" class="comment-input" @update="update" />
@@ -25,6 +31,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import axios from 'axios'
+import { ToastProgrammatic as Toast } from 'buefy'
 import { Icolor } from '@/models/color'
 export default Vue.extend({
   components: { },
@@ -34,7 +41,8 @@ export default Vue.extend({
       isFullPage: true,
       id: this.$route.params.id,
       data: {} as Icolor,
-      date: ''
+      date: '',
+      likeBtnShow: true
     }
   },
   mounted () {
@@ -54,10 +62,42 @@ export default Vue.extend({
           this.data = response.data.color[0]
           this.isLoading = false
           this.calcDate()
+          if (this.$store.getters.user) {
+            if (Object.values(this.data.like).includes(this.$store.getters.user.email)) {
+              this.likeBtnShow = false
+            } else {
+              this.likeBtnShow = true
+            }
+          }
         })
         .catch((error) => {
           console.log(error)
         })
+    },
+    addLike () {
+      axios.post('http://49.50.162.193:5000/api/like', {
+        params: {
+          id: this.id,
+          user: this.$store.getters.user.email
+        }
+      })
+        .then(() => {
+          Toast.open('좋아요를 눌렀습니다.')
+        })
+        .catch((error) => {
+          console.log(error.response)
+        })
+      location.reload()
+    },
+    delLike () {
+      axios.delete(`http://49.50.162.193:5000/api/unlike/${this.id}/${this.$store.getters.user.email}`)
+        .then(() => {
+          Toast.open('좋아요를 취소했습니다.')
+        })
+        .catch((error) => {
+          console.log(error.response)
+        })
+      location.reload()
     }
   }
 })
