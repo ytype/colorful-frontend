@@ -22,7 +22,7 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rer: 'stylesheet', type: 'text/css', href: 'http://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css' }
+      { rer: 'stylesheet', type: 'text/css', href: 'https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css' }
     ]
   },
   /*
