@@ -18,7 +18,7 @@ export default Vue.extend({
     }
   },
   mounted () {
-    axios.get('http://127.0.0.1:5000/api/color')
+    axios.get('http://49.50.162.193:5000/api/color')
       .then((response) => {
         this.color = response.data.color
       })

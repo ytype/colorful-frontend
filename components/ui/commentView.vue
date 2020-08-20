@@ -14,7 +14,7 @@
             {{ comment.content }}
           </p>
         </div>
-        <button v-if="comment.user === $store.getters.user.email" class="button" @click="removeComment()">
+        <button v-if="showBtn" class="button" @click="removeComment()">
           댓글 삭제
         </button>
       </div>
@@ -31,11 +31,17 @@ export default Vue.extend({
   props: ['comment'],
   data () {
     return {
-      date: ''
+      date: '',
+      showBtn: false
     }
   },
   mounted () {
     this.calcDate()
+    if (this.$store.getters.user) {
+      if (this.comment.user === this.$store.getters.user.email) {
+        this.showBtn = true
+      }
+    }
   },
   methods: {
     calcDate () {
@@ -43,7 +49,7 @@ export default Vue.extend({
       this.date = old.substr(0, 10)
     },
     removeComment () {
-      axios.delete('http://127.0.0.1:5000/api/comment/' + this.$route.params.id + '/' + this.comment._id)
+      axios.delete('http://49.50.162.193:5000/api/comment/' + this.$route.params.id + '/' + this.comment._id)
         .then(() => {
           Toast.open('댓글을 삭제했습니다.')
           this.$emit('update')

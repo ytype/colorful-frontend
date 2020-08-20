@@ -22,7 +22,6 @@
 </template>
 
 <script lang="ts">
-import { stringify } from 'querystring'
 import Vue from 'vue'
 import { Chrome } from 'vue-color'
 import axios from 'axios'
@@ -56,7 +55,7 @@ export default Vue.extend({
       this.color.push({ value: '' })
     },
     submit () {
-      axios.post('http://127.0.0.1:5000/api/color', {
+      axios.post('http://49.50.162.193:5000/api/color', {
         color: this.color,
         title: this.title,
         content: this.content,

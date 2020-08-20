@@ -25,7 +25,7 @@ export default Vue.extend({
         Toast.open('로그인 후 이용해주세요.')
         this.$store.dispatch('signUserInGoogle')
       } else {
-        axios.post('http://127.0.0.1:5000/api/comment', {
+        axios.post('http://49.50.162.193:5000/api/comment', {
           id: this.id,
           user: this.$store.getters.user.email,
           content: this.content

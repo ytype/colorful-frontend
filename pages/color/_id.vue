@@ -1,7 +1,9 @@
 <template>
   <section>
     <ColorCarousel :data="data.color" />
-    <img v-if="data.image" :src="`${data.image}`">
+    <div class="image-view">
+      <img v-if="data.image" :src="`${data.image}`">
+    </div>
     <div class="main">
       <h1 class="title">
         <i class="fas fa-palette" style="margin-right:10px;" />
@@ -47,7 +49,7 @@ export default Vue.extend({
       this.date = old.substr(0, 10)
     },
     fetchData () {
-      axios.get(`http://127.0.0.1:5000/api/color/${this.id}`)
+      axios.get(`http://49.50.162.193:5000/api/color/${this.id}`)
         .then((response) => {
           this.data = response.data.color[0]
           this.isLoading = false
@@ -79,5 +81,13 @@ export default Vue.extend({
 }
 .comment-view-box {
   margin-bottom: 1rem;
+}
+.image-view {
+  display: flex;
+  justify-content: center;
+  img {
+    max-width: 500px;
+    height: auto;
+  }
 }
 </style>

@@ -68,8 +68,9 @@ export default Vue.extend({
 
 <style lang="scss" >
 .navbar-item img {
-  width: 20px;
-  height: auto;
+  width: auto;
+  height: 1.75rem;
+  margin-right: 15px;
 }
 .navbar-link:not(.is-arrowless)::after {
   border-color: #FF9E6E;

@@ -12,6 +12,7 @@ import * as firebase from 'firebase'
 export default Vue.extend({
   created () {
     try {
+      console.log(!!process.env.VUE_APP_appId)
       firebase.initializeApp({
         apiKey: process.env.VUE_APP_apiKey,
         authDomain: process.env.VUE_APP_authDomain,
@@ -22,8 +23,6 @@ export default Vue.extend({
         appId: process.env.VUE_APP_appId,
         measurementId: process.env.VUE_APP_measurementId
       })
-      // eslint-disable-next-line no-console
-      console.log('init firebase')
     } catch (err) {
       if (!/already exists/.test(err.message)) {
         // eslint-disable-next-line no-console
