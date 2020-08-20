@@ -37,7 +37,9 @@ export default {
   plugins: [
     '~/plugins/fontawesome.ts'
   ],
-
+  router: {
+    base: '/colorful-frontend/'
+  },
   /*
   ** Auto import components
   ** See https://nuxtjs.org/api/configuration-components
