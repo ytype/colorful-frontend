@@ -8,7 +8,7 @@ export default {
   ** Nuxt target
   ** See https://nuxtjs.org/api/configuration-target
   */
-  target: 'static',
+  target: 'server',
   /*
   ** Headers of the page
   ** See https://nuxtjs.org/api/configuration-head
@@ -37,9 +37,6 @@ export default {
   plugins: [
     '~/plugins/fontawesome.ts'
   ],
-  router: {
-    base: '/colorful-frontend/'
-  },
   /*
   ** Auto import components
   ** See https://nuxtjs.org/api/configuration-components
