@@ -78,7 +78,7 @@ export default Vue.extend({
       if (!this.$store.getters.user) {
         Toast.open('로그인 후 이용해주세요.')
       } else {
-        axios.post('http://49.50.162.193:5000/api/like', { // http://49.50.162.193:5000/api/like
+        axios.post('http://49.50.162.193:5000/api/like', {
           params: {
             id: this.id,
             user: this.$store.getters.user.email
